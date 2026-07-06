@@ -127,7 +127,7 @@ def _validate_and_fix(parsed: dict, problem: str) -> dict:
 async def solve(request: Request):
     body = await request.json()
     problem = body.get("problem", "")
-
+    print(f"[/solve] problem_id={body.get('problem_id')} problem={problem!r}")
     try:
         parsed = await call_llm(problem)
         result = _validate_and_fix(parsed, problem)
@@ -155,8 +155,4 @@ async def solve(request: Request):
 async def health():
     return {"status": "ok"}
 
-@app.post("/solve")
-async def solve(request: Request):
-    body = await request.json()
-    problem = body.get("problem", "")
-    print(f"[/solve] problem_id={body.get('problem_id')} problem={problem!r}")  # add this line
+
