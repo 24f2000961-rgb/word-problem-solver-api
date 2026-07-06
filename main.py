@@ -154,3 +154,9 @@ async def solve(request: Request):
 @app.get("/")
 async def health():
     return {"status": "ok"}
+
+@app.post("/solve")
+async def solve(request: Request):
+    body = await request.json()
+    problem = body.get("problem", "")
+    print(f"[/solve] problem_id={body.get('problem_id')} problem={problem!r}")  # add this line
